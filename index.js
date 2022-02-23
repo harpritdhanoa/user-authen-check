@@ -2,10 +2,14 @@ const {Pool} = require('pg');
 const express = require('express');
 const app = express();
 var rand = require("generate-key");
+const dotenv = require('dotenv');
+
+dotenv.config();
+console.log(`Your port is ${process.env.CONNECTIONSTRING}`); // 8626
 
 const pool = new Pool({
     // To Do : Connection string needs to be in a variable for prod use.
-    connectionString: "postgres://qhgomctuujzvlc:08256e3da5bc83c8f2cb08feec189089d74275f0c29ab37aeb79beca9a4dafa6@ec2-54-228-97-176.eu-west-1.compute.amazonaws.com:5432/d80ano56lpbm6v",
+    connectionString: `${process.env.CONNECTIONSTRING}`,
     ssl: {
         rejectUnauthorized: false
     }
