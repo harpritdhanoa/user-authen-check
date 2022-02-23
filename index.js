@@ -5,7 +5,12 @@ var rand = require("generate-key");
 const dotenv = require('dotenv');
 
 dotenv.config();
-console.log(`Your port is ${process.env.CONNECTIONSTRING}`); // 8626
+console.log(`Your connection string is ${process.env.CONNECTIONSTRING}`); // 8626
+
+let port = process.env.PORT;
+if (port == null || port == "") {
+  port = 8000;
+}
 
 const pool = new Pool({
     // To Do : Connection string needs to be in a variable for prod use.
@@ -15,8 +20,8 @@ const pool = new Pool({
     }
 });
 
-app.listen(3300, ()=>{
-    console.log("Sever is now listening at port 3300");
+app.listen(port, ()=>{
+    console.log("Sever is now listening at port "+port);
 })
 
 app.get('/auth/:uname/:passwd', (req, res)=>{
